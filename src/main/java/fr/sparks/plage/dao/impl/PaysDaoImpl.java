@@ -25,6 +25,21 @@ public class PaysDaoImpl implements PaysDao {
     @PersistenceContext
     private EntityManager entityManager;
     
+    //écrire la requete qui permet de chercher un pays par son nom
+    @Override
+    public Pays findByNom(String nom) {
+        Session session = entityManager.unwrap(Session.class);
+        //TODO : à compléter
+        return null;
+    }
+    
+    @Override
+    public List<Pays> saveAll(List<Pays> paysList) {
+        Session session = entityManager.unwrap(Session.class);
+        //TODO : à compléter
+        return paysList;
+    }
+    
     //Session session = entityManager.unwrap(Session.class); // Pour récupérer la session Hibernate
     //SessionFactory sf = session.getSessionFactory();
     
@@ -34,7 +49,7 @@ public class PaysDaoImpl implements PaysDao {
         Session session = entityManager.unwrap(Session.class);
         Pays pays = session.find(Pays.class, id);
         return Optional.ofNullable(pays);
-    }*/
+    }
     
     @Override
     public Optional<Pays> findByCode(String code) {
@@ -55,21 +70,11 @@ public class PaysDaoImpl implements PaysDao {
         }
     }
     
-    @Override
-    public Pays findByNom(String nom) {
-        Session session = entityManager.unwrap(Session.class);
-        
-        List<Pays> listPays = session.createQuery("from Pays where nom = :nom", Pays.class).setParameter("nom", nom).list();
-        return listPays.isEmpty() ? null : listPays.get(0);
-    }
+    
+  
     
     
-    @Override
-    public Pays save(Pays pays) {
-        Session session = entityManager.unwrap(Session.class);
-        session.save(pays);   //commit    //flush à chaque fois
-        return pays;
-    }
+   
     
     
     @Override
@@ -86,15 +91,7 @@ public class PaysDaoImpl implements PaysDao {
         return nbPays;
     }
     
-    @Override
-    public List<Pays> saveAll(List<Pays> paysList) {
-        Session session = entityManager.unwrap(Session.class);
-        paysList.forEach(pays -> {
-                session.save(pays);
-                System.out.println("Nombre de Pays ajoutés " + count()); //flush à chaque fois
-        });
-        return paysList;
-    }
+
     
     @Override
     public List<PaysResult> findNombreClientsParPays() {
@@ -123,6 +120,35 @@ public class PaysDaoImpl implements PaysDao {
         }
         return paysList;
     }*/
+    @Override
+    public Optional<Pays> findByCode(String id) {
+        return Optional.empty();
+    }
     
+    @Override
+    public Optional<Pays> findById(String code) {
+        return Optional.empty();
+    }
+    
+    
+    @Override
+    public List<Pays> findAll() {
+        return null;
+    }
+    
+    @Override
+    public long count() {
+        return 0;
+    }
+    
+    
+    @Override
+    public Pays save(Pays theme) {
+        return null;
+    }
+    @Override
+    public List<PaysResult> findNombreClientsParPays() {
+        return null;
+    }
     
 }
