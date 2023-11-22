@@ -11,28 +11,32 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ClientDao extends JpaRepository<Client, Long> {
-
-    @Query("from Client c where c.prenom = 'Alexis'")
+    
+    //1. écrire la requete qui liste les clients dont le prenom est alexis
+    
     List<Client> findClientNamedAlexis();
     
-    @Query("from Client c where c.prenom = ?1")
+    //2. écrire la requete qui liste les clients dont le prenom est alexis via une variable
+   
     List<Client> findClientByParameterName(String prenom);
     
-    @Query("from Client c where c.prenom = :prenom")
-    List<Client> findClientByParameterFirstNameNamed(@Param("prenom") String prenom);
+    //3. écrire la requete qui liste les clients dont le prenom est passé en parametre de la requete
+    //List<Client> findClientByParameterFirstNameNamed
     
+    //4. écrire la requete qui liste les clients dont le nom est passé en parametre de la requete
     @Query("from Client c where c.nom = :nomParameter")
     List<Client> findClientByParameterNameNamed(@Param("nomParameter") String nom);
     
+    //5. écrire la requete qui liste les clients dont le pays est l'espagne
     
-    @Query("from Client c where c.pays.code = 'ES'")
     List<Client> findSpanishClients();
     
-    @Query("from Client c where c.pays.code = ?1")
-    List<Client> findClientsByPaysCode(String code);
+    //6. écrire la requete qui liste les clients dont le pays est filtré
+    // via une variable passée en paramètre via l'annotation @Param
     
-    @Query("from Client c where c.pays.code = :paysCode")
-    List<Client> findClientsByPaysCodeNamed(@Param("paysCode") String paysCode);
+    
+    //7. écrire la requete qui liste les clients dont le pays est filtré par code pays et par une variable @Param
+    
     
     @Query("from Client c where c.dateHeureInscription >= :date")
     List<Client> findClientsInscritsApres(@Param("date") LocalDateTime date);
